@@ -2,8 +2,7 @@ const jwt = require("jsonwebtoken");
 const { jwtSecret } = require("../config/keys");
 
 exports.authenticateJWT = (req, res, next) => {
-  const token = req.cookies.token || req.headers.authorization;
-
+  const token = req.headers.authorization;
   if (!token) {
     return res.status(401).json({
       errorMessage: "No token. Authentication denied",
