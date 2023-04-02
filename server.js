@@ -26,7 +26,12 @@ app.use("/uploads", express.static("uploads"));
 app.use("/api/filter", filterRoutes);
 app.use("/api/order", orderRoutes);
 const server = http.createServer(app);
-const io = new Server(server);
+const io = new Server({
+  ...server,
+  cors: {
+    origin: "https://food-management-2023.web.app",
+  },
+});
 
 io.on("connection", (socket) => {
   console.log("a user connected");
