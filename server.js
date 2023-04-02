@@ -9,9 +9,6 @@ const categoryRoutes = require("./routes/category");
 const foodRoutes = require("./routes/food");
 const filterRoutes = require("./routes/filter");
 const orderRoutes = require("./routes/order");
-const { Server } = require("socket.io");
-
-const http = require("http");
 
 // middleware...
 app.use(cookieParser());
@@ -25,26 +22,10 @@ app.use("/api/food", foodRoutes);
 app.use("/uploads", express.static("uploads"));
 app.use("/api/filter", filterRoutes);
 app.use("/api/order", orderRoutes);
-const server = http.createServer(app);
-const io = new Server({
-  ...server,
-  cors: {
-    origin: "https://food-management-2023.web.app",
-  },
-});
-
-io.on("connection", (socket) => {
-  console.log("a user connected");
-});
-
-setInterval(() => {
-  io.emit("newOrder", "test");
-  console.log("working");
-}, 5000);
 
 connectDB();
 const port = process.env.PORT || 6000;
 
-server.listen(port, () => {
+app.listen(port, () => {
   console.log("Listening to app on", port);
 });
