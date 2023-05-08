@@ -24,7 +24,7 @@ app.use("/api/filter", filterRoutes);
 app.use("/api/order", orderRoutes);
 
 connectDB();
-const port = process.env.PORT || 6000;
+const port = process.env.PORT || 3500;
 
 app.listen(port, () => {
   console.log("Listening to app on", port);
